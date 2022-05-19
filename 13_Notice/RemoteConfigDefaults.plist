@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>isHidden</key>
+	<true/>
+	<key>title</key>
+	<string>공지사항</string>
+	<key>detail</key>
+	<string>공지내용</string>
+	<key>detailTwo</key>
+	<string>공지내용2 (일시)</string>
+</dict>
+</plist>
