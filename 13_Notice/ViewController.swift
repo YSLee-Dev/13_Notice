@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseRemoteConfig
+import FirebaseAnalytics
 
 class ViewController: UIViewController {
     
@@ -126,11 +127,41 @@ extension ViewController {
                 
                 popup.textContents = AlertText(title: title, detail: detail, detailTwo: detailTwo)
                 self.present(popup, animated: true)
+            }else{
+                self.showEventAlert()
             }
         }
     }
     
     func isNoticeHidden(_ remoteConfig:RemoteConfig)-> Bool{
         return remoteConfig["isHidden"].boolValue
+    }
+}
+
+// A/B Tesing
+extension ViewController{
+    func showEventAlert(){
+        guard let remoteConfig = self.remoteConfig else {return}
+        
+        remoteConfig.fetch{[weak self] status, _ in
+            if status == .success{
+                remoteConfig.activate(completion: nil)
+                print("성공")
+            }else{
+                print("error")
+            }
+            
+            let message = remoteConfig["msg"].stringValue ?? "값 없음"
+            
+            let alert = UIAlertController(title: "깜짝 이벤트", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인하기", style: .default){_ in
+                // Analytics 측정
+                Analytics.logEvent("Event_Alert_Click", parameters: nil)
+            })
+            alert.addAction(UIAlertAction(title: "취소하기", style: .cancel))
+            
+            self?.present(alert, animated: true) 
+            
+        }
     }
 }

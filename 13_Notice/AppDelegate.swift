@@ -16,6 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        /* firebase 토큰 확인
+        Installations.installations().authTokenForcingRefresh(true){ result, error in
+            if let error = error{
+                print(error)
+            }
+            
+            guard let result = result else {return}
+            print("result", result)
+        }
+        */
+         
         return true
     }
 
